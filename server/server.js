@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 
 app.get('/getTodos', (req, res) => {
   Todo.find().then((results) => {
-    res.send(JSON.stringify(results));
+    res.send({results});
   }, (e) => {
     console.log('Unable to fetch todos', e);
   })
@@ -25,7 +25,7 @@ app.get('/getTodos', (req, res) => {
 app.post('/addTodo', (req, res) => {
  var todo = new Todo(req.body);
     todo.save().then((tod)=>{
-      res.send(JSON.stringify(tod));
+      res.send({tod});
     },(exc)=>{
         console.log('Unable to save todo',exc);
     });
@@ -34,7 +34,7 @@ app.post('/addTodo', (req, res) => {
 
 app.get('/getUsers', (req, res) => {
   User.find().then((results) => {
-    res.send(JSON.stringify(results));
+    res.send({results});
   }, (e) => {
     console.log('Unable to fetch users', e);
   })
@@ -43,8 +43,8 @@ app.get('/getUsers', (req, res) => {
 
 app.post('/addUser', (req, res) => {
  var user = new User(req.body);
- user.save().then((tod)=>{
-      res.send(JSON.stringify(tod));
+ user.save().then((userDoc)=>{
+      res.send({userDoc});
     },(exc)=>{
         console.log('Unable to save user',exc);
     });
